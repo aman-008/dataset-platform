@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3001";
+const API_URL = "https://dataset-platform-cnjm.onrender.com";
 
 // get id from URL
 const params = new URLSearchParams(window.location.search);
