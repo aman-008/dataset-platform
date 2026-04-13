@@ -1,0 +1,151 @@
+/* ===== GLOBAL ===== */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f1f5f9;
+  margin: 0;
+}
+
+.main-container {
+  max-width: 1200px;
+  margin: auto;
+}
+/* ===== NAVBAR ===== */
+.navbar {
+  background: #0f172a;
+  color: white;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar h2 {
+  margin: 0;
+}
+
+.nav-btn {
+  color: white;
+  margin-left: 15px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.nav-btn:hover {
+  opacity: 0.8;
+}
+
+/* ===== PROFILE ===== */
+#profileSection {
+  text-align: center;
+  margin: 20px;
+}
+
+/* ===== SEARCH ===== */
+.search-box {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px;
+}
+
+.search-box input {
+  padding: 10px;
+  width: 250px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.search-box button {
+  padding: 10px 15px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.search-box button:hover {
+  background: #1d4ed8;
+}
+
+/* ===== UPLOAD CARD ===== */
+.upload-container {
+  max-width: 420px;
+  margin: 20px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+}
+
+.upload-container h3 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.upload-container input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.upload-container button {
+  width: 100%;
+  margin-top: 15px;
+  padding: 10px;
+  background: #10b981;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.upload-container button:hover {
+  background: #059669;
+}
+
+/* ===== DATASET GRID ===== */
+.dataset-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+/* ===== DATASET CARD ===== */
+.dataset {
+  background: white;
+  padding: 18px;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+  transition: 0.3s;
+}
+
+.dataset:hover {
+  transform: translateY(-5px);
+}
+
+.dataset h3 {
+  margin: 0;
+  color: #2563eb;
+  cursor: pointer;
+}
+
+.dataset p {
+  margin: 6px 0;
+  color: #555;
+}
+
+.dataset a {
+  display: inline-block;
+  margin-top: 10px;
+  color: #10b981;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.dataset a:hover {
+  text-decoration: underline;
+}

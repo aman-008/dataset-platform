@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dataset Hub</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+      <div class="main-container">
+        <!-- 🔷 Navbar -->
+      <div class="navbar">
+        <h2>📊 Dataset Hub</h2>
+
+        <div id="navActions">
+          <a href="login.html" class="nav-btn">Login</a>
+          <a href="signup.html" class="nav-btn">Signup</a>
+        </div>
+      </div>
+
+      <!-- 👤 Profile -->
+      <div id="profileSection"></div>
+
+      <!-- 🔍 Search -->
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search datasets..." />
+        <button onclick="searchDatasets()">Search</button>
+      </div>
+
+      <!-- 📤 Upload -->
+      <div class="upload-container">
+        <h3>Upload Dataset</h3>
+
+        <form id="uploadForm">
+          <input type="text" id="title" placeholder="Title" required />
+          <input type="text" id="description" placeholder="Description" />
+          <input type="text" id="tags" placeholder="Tags" />
+          <input type="file" id="file" accept=".csv" required />
+          <button type="submit">Upload</button>
+        </form>
+      </div>
+
+      <!-- 📂 Dataset List -->
+      <div id="datasetList" class="dataset-grid"></div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
