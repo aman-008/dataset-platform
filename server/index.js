@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
+const upload = require("./config/multer");
+const Dataset = require("./models/Dataset");
 
 const User = require("./models/User");
 
@@ -101,6 +103,124 @@ app.post("/login", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
+// ================= UPLOAD DATASET =================
+
+app.post("/upload", upload.single("file"), async (req, res) => {
+  try {
+    const { title, description, tags } = req.body;
+
+    if (!title || !req.file) {
+      return res.status(400).json({ message: "Title and file required" });
+    }
+
+    const dataset = new Dataset({
+      title,
+      description,
+      tags: tags ? tags.split(",") : [],
+      fileUrl: req.file.path,
+      fileType: req.file.mimetype,
+      uploadedBy: null
+    });
+
+    await dataset.save();
+
+    res.status(201).json({
+      message: "Dataset uploaded successfully",
+      dataset
+    });
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
+// ================= DATASET ROUTES =================
+// Get all datasets
+app.get("/datasets", async (req, res) => {
+  try {
+    const datasets = await Dataset.find().sort({ createdAt: -1 });
+    res.json(datasets);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
+// Get dataset by ID
+// 👇 ADD HERE
+app.get("/datasets/:id", async (req, res) => {
+  try {
+    const dataset = await Dataset.findById(req.params.id);
+
+    if (!dataset) {
+      return res.status(404).json({ message: "Dataset not found" });
+    }
+
+    // increase views
+    dataset.views += 1;
+    await dataset.save();
+
+    res.json(dataset);
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
+
+// Download dataset
+app.get("/download/:id", async (req, res) => {
+  try {
+    const dataset = await Dataset.findById(req.params.id);
+
+    if (!dataset) {
+      return res.status(404).json({ message: "Dataset not found" });
+    }
+
+    // increase downloads
+    dataset.downloads += 1;
+    await dataset.save();
+
+    // redirect to file
+    res.redirect(dataset.fileUrl);
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
+// Search datasets
+app.get("/search", async (req, res) => {
+  try {
+    const { query, tag } = req.query;
+
+    let filter = {};
+
+    // search by title
+    if (query) {
+      filter.title = { $regex: query, $options: "i" };
+    }
+
+    // filter by tag
+    if (tag) {
+      filter.tags = tag;
+    }
+
+    const datasets = await Dataset.find(filter).sort({ createdAt: -1 });
+
+    res.json(datasets);
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
+
 
 
 // ================= SERVER =================
